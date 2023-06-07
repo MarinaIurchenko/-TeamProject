@@ -179,4 +179,32 @@ public class SavingAccountTest {
             account.yearChange();
         });
     }
+
+    @Test
+    public void shouldNotCalcRateIfAdd() { // тест на расчет процентов на остаток по счету в случае если было изменение счета (пополнение)
+        SavingAccount account = new SavingAccount(
+                5_000,
+                1_000,
+                7_000,
+                7
+        );
+
+        account.add(1_000);
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
+
+    @Test
+    public void shouldNotCalcRateIfPay() { // тест на расчет процентов на остаток по счету в случае если было изменение счета (оплата)
+        SavingAccount account = new SavingAccount(
+                3_000,
+                500,
+                5_000,
+                12
+        );
+
+        account.pay(1_500);
+
+        Assertions.assertEquals(0, account.yearChange());
+    }
 }
