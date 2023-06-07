@@ -22,7 +22,7 @@ public class SavingAccountTest {
     @Test
     public void shouldNotTestIfMinBalanceNegative() { // тест на исключение вида IllegalArgumentException при отрицательном мин.балансе
 
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
                     4_000,
                     -1,
@@ -34,7 +34,7 @@ public class SavingAccountTest {
     @Test
     public void shouldNotTestIfUnderMinBalance() { // тест на исключение вида IllegalArgumentException при первоначальном балансе ниже мин.значения
 
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
                     500,
                     1_000,
@@ -47,7 +47,7 @@ public class SavingAccountTest {
     @Test
     public void shouldNotTestIfOverMaxBalance() { // тест на исключение вида IllegalArgumentException при первоначальном балансе выше макс.значения
 
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
                     5_500,
                     1_000,
@@ -60,7 +60,7 @@ public class SavingAccountTest {
     @Test
     public void shouldNotTestIfMinBalanceOverMaxBalance() { // тест на исключение вида IllegalArgumentException при мин.балансе больше макс.баланса
 
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
                     2_000,
                     3_000,
@@ -175,7 +175,7 @@ public class SavingAccountTest {
                 -10
         );
 
-        Assertions.assertThrows(IllegalAccessError.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             account.yearChange();
         });
     }
