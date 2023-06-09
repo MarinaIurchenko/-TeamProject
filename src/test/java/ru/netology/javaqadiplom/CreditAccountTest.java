@@ -48,15 +48,17 @@ public class CreditAccountTest {
 
     @Test
     public void testPayLimit() {// Тест на оплату в размере предельного значения кредитного лимита
-        boolean isPaid = creditAccount.pay(1000);
+        CreditAccount account = new CreditAccount(1000, 5000, 15);
+        boolean isPaid = account.pay(1000);
         Assertions.assertTrue(isPaid);
-        Assertions.assertEquals(-500, creditAccount.getBalance());
+        Assertions.assertEquals(0, account.getBalance());
     }
     @Test
     public void testPayAll() {// Тест на оплату в размере доступной суммы
-        boolean isPaid = creditAccount.pay(1500);
+        CreditAccount account = new CreditAccount(1000, 5000, 15);
+        boolean isPaid = account.pay(1500);
         Assertions.assertTrue(isPaid);
-        Assertions.assertEquals(-500, creditAccount.getBalance());
+        Assertions.assertEquals(-500, account.getBalance());
     }
 
     @Test
@@ -83,9 +85,10 @@ public class CreditAccountTest {
 
     @Test
     public void testAddZero() {// тест на поведение метода add,при 0 значении и что баланс счета после попытки выполнения операции add со значением 0 остался неизменным и равен 1000 единицам
-        boolean isAdded = creditAccount.add(0);
+        CreditAccount account = new CreditAccount(1000, 5000, 15);
+        boolean isAdded = account.add(0);
         Assertions.assertFalse(isAdded);
-        Assertions.assertEquals(1000, creditAccount.getBalance());
+        Assertions.assertEquals(1000, account.getBalance());
     }
     @Test
     public void testAddNegative() {//Тест для метода `add` при попытке добавить отрицательную сумму
