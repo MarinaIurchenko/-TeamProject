@@ -168,15 +168,14 @@ public class SavingAccountTest {
 
     @Test
     public void shouldThrowWhenRateNegative() { // тест на исключение вида IllegalArgumentException при отрицательном значении годовой ставки
-        SavingAccount account = new SavingAccount(
-                5_000,
-                1_000,
-                5_000,
-                -10
-        );
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            account.yearChange();
+            SavingAccount account = new SavingAccount(
+                    5_000,
+                    1_000,
+                    5_000,
+                    -10
+            );
         });
     }
 
