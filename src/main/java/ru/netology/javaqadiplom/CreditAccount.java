@@ -5,8 +5,7 @@ public class CreditAccount extends Account {
 
     public CreditAccount(int initialBalance, int creditLimit, int rate) {
         if (rate <= 0) {
-            throw new IllegalArgumentException(
-                    "Накопительная ставка не может быть отрицательной, а у вас: " + rate
+            throw new IllegalArgumentException("Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
         }
         this.balance = initialBalance;

@@ -47,14 +47,14 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void testPayLimit() {// Тест на оплату в размере предельного значения кредитного лимита
+    public void testPayLimit() {// Тест на оплату в размере предельного значения баланса
         CreditAccount account = new CreditAccount(1000, 5000, 15);
         boolean isPaid = account.pay(1000);
         Assertions.assertTrue(isPaid);
         Assertions.assertEquals(0, account.getBalance());
     }
     @Test
-    public void testPayAll() {// Тест на оплату в размере доступной суммы
+    public void testPayAll() {// Тест на оплату в размере превышающий баланс
         CreditAccount account = new CreditAccount(1000, 5000, 15);
         boolean isPaid = account.pay(1500);
         Assertions.assertTrue(isPaid);
@@ -135,9 +135,9 @@ public class CreditAccountTest {
         int creditLimit = 5000;
         int rate = 10;
         CreditAccount account = new CreditAccount(initialBalance, creditLimit, rate);
-        boolean result = account.pay(-5000);
+        boolean result = account.pay(5000);
         Assertions.assertTrue(result);
-        Assertions.assertEquals(-5000, account.getBalance());
+        Assertions.assertEquals(-4000, account.getBalance());
     }
 
     @Test
