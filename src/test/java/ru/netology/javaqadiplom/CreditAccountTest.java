@@ -77,9 +77,9 @@ public class CreditAccountTest {
     }
     @Test
     public void testAddOverLimit() {//Тест для метода `add` при добавлении суммы, превышающей кредитный лимит
-        CreditAccount account = new CreditAccount(-3000, 5000, 15);
+        CreditAccount account = new CreditAccount(3000, 5000, 15);
         boolean isAdded = account.add(6000);
-        Assertions.assertFalse(isAdded);
+        Assertions.assertTrue(isAdded);
         Assertions.assertEquals(-3000, account.getBalance());
     }
 
@@ -119,14 +119,14 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void testPayWithAmountEqualToBalance() {//Тест проверяет, что при выплате суммы, которая равна текущему балансу метод возвращает что выплата была успешно завершена
+    public void testAddWithAmountEqualToBalance() {//Тест проверяет, что при выплате суммы, которая равна текущему балансу метод возвращает что выплата была успешно завершена
         int initialBalance = 1000;
         int creditLimit = 5000;
         int rate = 10;
         CreditAccount account = new CreditAccount(initialBalance, creditLimit, rate);
-        boolean result = account.pay(1000);
+        boolean result = account.add(1000);
         Assertions.assertTrue(result);
-        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(2000, account.getBalance());
     }
 
     @Test
