@@ -76,11 +76,11 @@ public class CreditAccountTest {
         Assertions.assertEquals(-3000, account.getBalance());
     }
     @Test
-    public void testAddOverLimit() {//Тест для метода `add` при добавлении суммы, превышающей кредитный лимит
+    public void testAddOverLimit() {//Тест для метода `add` при добавлении суммы,превышающий кредитный лимит
         CreditAccount account = new CreditAccount(3000, 5000, 15);
         boolean isAdded = account.add(6000);
         Assertions.assertTrue(isAdded);
-        Assertions.assertEquals(-3000, account.getBalance());
+        Assertions.assertEquals(9000, account.getBalance());
     }
 
     @Test
