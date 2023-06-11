@@ -43,7 +43,6 @@ public class SavingAccountTest {
             );
         });
     }
-
     @Test
     public void shouldNotTestIfOverMaxBalance() { // тест на исключение вида IllegalArgumentException при первоначальном балансе выше макс.значения
 
