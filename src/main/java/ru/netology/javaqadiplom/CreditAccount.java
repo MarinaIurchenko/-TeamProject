@@ -7,6 +7,12 @@ public class CreditAccount extends Account {
         if (rate <= 0) {
             throw new IllegalArgumentException("Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
+        } else if (creditLimit <= 0) {
+            throw new IllegalArgumentException("Кредитный лимит не может быть отрицательным, а у вас: " + creditLimit
+            );
+        } else if (initialBalance < 0) {
+            throw new IllegalArgumentException("Начальный баланс не может быть отрицательным, а у вас: " + initialBalance
+            );
         }
         this.balance = initialBalance;
         this.creditLimit = creditLimit;
@@ -18,20 +24,20 @@ public class CreditAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = balance - amount;
-        if (balance > -creditLimit) {
-            balance = -amount;
+        if (balance - amount >= -creditLimit) {
+            balance -= amount;
             return true;
         } else {
             return false;
         }
     }
+
     @Override
     public boolean add(int amount) {
         if (amount <= 0) {
             return false;
         }
-        balance = amount;
+        balance += amount;
         return true;
     }
 

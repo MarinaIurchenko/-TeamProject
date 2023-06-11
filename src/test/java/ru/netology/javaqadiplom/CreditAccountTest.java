@@ -131,7 +131,7 @@ public class CreditAccountTest {
 
     @Test
     public void testPayWithAmountEqualToNegativeCreditLimit() {//Тест проверяет, что при выплате суммы, которая эквивалентна отрицательному предельному кредитному лимиту , метод должен вернуть true и баланс должен стать равным этой сумме
-        int initialBalance = 1000;
+        int initialBalance = 1000; 
         int creditLimit = 5000;
         int rate = 10;
         CreditAccount account = new CreditAccount(initialBalance, creditLimit, rate);
