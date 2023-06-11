@@ -7,7 +7,7 @@ public class CreditAccount extends Account {
         if (rate <= 0) {
             throw new IllegalArgumentException("Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
-        } else if (creditLimit <= 0) {
+        } else if (creditLimit < 0) {
             throw new IllegalArgumentException("Кредитный лимит не может быть отрицательным, а у вас: " + creditLimit
             );
         } else if (initialBalance < 0) {
@@ -43,6 +43,9 @@ public class CreditAccount extends Account {
 
     @Override
     public int yearChange() {
+        if (balance >=0){
+            return 0;
+        }else
         return balance / 100 * rate;
     }
 
