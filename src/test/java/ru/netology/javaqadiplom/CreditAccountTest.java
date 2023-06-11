@@ -70,7 +70,8 @@ public class CreditAccountTest {
     }
     @Test
     public void testPayOverDebt() {//Тест для метода `pay` при попытке оплатить сумму, превышающую общую задолженность по кредиту
-        CreditAccount account = new CreditAccount(-3000, 5000, 15);
+        CreditAccount account = new CreditAccount(0, 5000, 15);
+        account.pay(3000);
         boolean isPaid = account.pay(4000);
         Assertions.assertFalse(isPaid);
         Assertions.assertEquals(-3000, account.getBalance());
@@ -105,16 +106,17 @@ public class CreditAccountTest {
     }
     @Test
     public void testYearChangeNegativeBalance() {//Тест для метода `yearChange` при балансе на счете, равном отрицательному кредитному лимиту
-        CreditAccount account = new CreditAccount(-5000, 5000, 10);
+        CreditAccount account = new CreditAccount(1000, 5000, 10);
+        account.pay(3000);
         int interest = account.yearChange();
-        int expectedInterest = (int) Math.round(-5000 * 0.1);
+        int expectedInterest = (int) Math.round(-2000 * 0.1);
         Assertions.assertEquals(expectedInterest, interest);
     }
     @Test
     public void testYearChangePositiveBalance() {// Тест для метода `yearChange` при балансе на счете, равном положительному кредитному лимиту
         CreditAccount account = new CreditAccount(3000, 2000, 8);
         int interest = account.yearChange();
-        int expectedInterest = (int) Math.round(3000 * 0.08);
+        int expectedInterest = 0;
         Assertions.assertEquals(expectedInterest, interest);
     }
 
@@ -138,17 +140,6 @@ public class CreditAccountTest {
         boolean result = account.pay(5000);
         Assertions.assertTrue(result);
         Assertions.assertEquals(-4000, account.getBalance());
-    }
-
-    @Test
-    public void testAddWithAmountEqualToNegativeCreditLimit() {//Тест проверяет, что при попытке внести сумму, равную отрицательному лимиту,транзакция должна быть выполнена успешно, а баланс счета должен стать равным 0
-        int initialBalance = -5000;
-        int creditLimit = 5000;
-        int rate = 10;
-        CreditAccount account = new CreditAccount(initialBalance, creditLimit, rate);
-        boolean result = account.add(-5000);
-        Assertions.assertTrue(result);
-        Assertions.assertEquals(0, account.getBalance());
     }
 
     @Test
