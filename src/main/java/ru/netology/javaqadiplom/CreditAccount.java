@@ -91,8 +91,9 @@ public class CreditAccount extends Account {
     public int yearChange() {
         if (balance >= 0) {
             return 0;
-        } else
-            return balance / 100 * rate;
+        } else {
+            return balance * rate / 100;
+        }
     }
 
     public int getCreditLimit() {

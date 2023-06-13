@@ -20,30 +20,37 @@ public class CreditAccountTest {
 
         assertEquals(3_000, account.getBalance());
     }
+
     @Test
-    public void testConstructorRight(){//Тест на корректность присвоения значений при создании объекта
-        CreditAccount account = new CreditAccount(0,5000,15);
-        int[] expected = {0,5000,15};
+    public void testConstructorRight() {//Тест на корректность присвоения значений при создании объекта
+        CreditAccount account = new CreditAccount(0, 5000, 15);
+        int[] expected = {0, 5000, 15};
         int[] actual = {account.getBalance(), account.getCreditLimit(), account.getRate()};
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
-    public void testValuesNegativeCreditLimit(){// Тест на корректные значения,при отрицательном кредитном лимите
+    public void testValuesNegativeCreditLimit() {// Тест на корректные значения,при отрицательном кредитном лимите
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            CreditAccount account = new CreditAccount(0,-5000,15);});
+            CreditAccount account = new CreditAccount(0, -5000, 15);
+        });
     }
+
     @Test
-    public void testValuesNegativeBalance(){// Тест на корректные значения,при отрицательном балансе
+    public void testValuesNegativeBalance() {// Тест на корректные значения,при отрицательном балансе
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            CreditAccount account = new CreditAccount(-1000,5000,15);});
+            CreditAccount account = new CreditAccount(-1000, 5000, 15);
+        });
     }
+
     @Test
-    public void testValuesNegativeInterestRate(){// Тест на корректные значения,при отрицательной процентной ставке
+    public void testValuesNegativeInterestRate() {// Тест на корректные значения,при отрицательной процентной ставке
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            CreditAccount account = new CreditAccount(1000,5000,-15);});
+            CreditAccount account = new CreditAccount(1000, 5000, -15);
+        });
     }
 
     @Test
@@ -53,6 +60,7 @@ public class CreditAccountTest {
         Assertions.assertTrue(isPaid);
         Assertions.assertEquals(0, account.getBalance());
     }
+
     @Test
     public void testPayAll() {// Тест на оплату в размере превышающий баланс
         CreditAccount account = new CreditAccount(1000, 5000, 15);
@@ -68,6 +76,7 @@ public class CreditAccountTest {
         Assertions.assertFalse(isPaid);
         Assertions.assertEquals(1000, account.getBalance());
     }
+
     @Test
     public void testPayOverDebt() {//Тест для метода `pay` при попытке оплатить сумму, превышающую общую задолженность по кредиту
         CreditAccount account = new CreditAccount(0, 5000, 15);
@@ -76,6 +85,7 @@ public class CreditAccountTest {
         Assertions.assertFalse(isPaid);
         Assertions.assertEquals(-3000, account.getBalance());
     }
+
     @Test
     public void testAddOverLimit() {//Тест для метода `add` при добавлении суммы,превышающий кредитный лимит
         CreditAccount account = new CreditAccount(3000, 5000, 15);
@@ -91,6 +101,7 @@ public class CreditAccountTest {
         Assertions.assertFalse(isAdded);
         Assertions.assertEquals(1000, account.getBalance());
     }
+
     @Test
     public void testAddNegative() {//Тест для метода `add` при попытке добавить отрицательную сумму
         CreditAccount account = new CreditAccount(1000, 5000, 15);
@@ -98,12 +109,14 @@ public class CreditAccountTest {
         Assertions.assertFalse(isAdded);
         Assertions.assertEquals(1000, account.getBalance());
     }
+
     @Test
     public void testYearChangeZeroBalanceAndLimit() {//Тест для метода `yearChange` при балансе на счете и кредитном лимите, равных нулю
         CreditAccount account = new CreditAccount(0, 0, 15);
         int interest = account.yearChange();
         Assertions.assertEquals(0, interest);
     }
+
     @Test
     public void testYearChangeNegativeBalance() {//Тест для метода `yearChange` при балансе на счете, равном отрицательному кредитному лимиту
         CreditAccount account = new CreditAccount(1000, 5000, 10);
@@ -112,6 +125,7 @@ public class CreditAccountTest {
         int expectedInterest = (int) Math.round(-2000 * 0.1);
         Assertions.assertEquals(expectedInterest, interest);
     }
+
     @Test
     public void testYearChangePositiveBalance() {// Тест для метода `yearChange` при балансе на счете, равном положительному кредитному лимиту
         CreditAccount account = new CreditAccount(3000, 2000, 8);
@@ -133,7 +147,7 @@ public class CreditAccountTest {
 
     @Test
     public void testPayWithAmountEqualToNegativeCreditLimit() {//Тест проверяет, что при выплате суммы, которая эквивалентна отрицательному предельному кредитному лимиту , метод должен вернуть true и баланс должен стать равным этой сумме
-        int initialBalance = 1000; 
+        int initialBalance = 1000;
         int creditLimit = 5000;
         int rate = 10;
         CreditAccount account = new CreditAccount(initialBalance, creditLimit, rate);

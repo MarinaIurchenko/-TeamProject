@@ -8,16 +8,16 @@ public class SavingAccount extends Account {
     protected boolean addCheck;
 
     public SavingAccount(int initialBalance, int minBalance, int maxBalance, int rate) {
-        if (initialBalance < 0|| initialBalance < minBalance || initialBalance > maxBalance) {
+        if (initialBalance < 0 || initialBalance < minBalance || initialBalance > maxBalance) {
             throw new IllegalArgumentException("Начальный баланс не может быть отрицательным, а у вас: " + initialBalance);
         }
         if (rate < 0) {
             throw new IllegalArgumentException("Накопительная ставка не может быть отрицательной, а у вас: " + rate);
         }
-        if (minBalance < 0){
+        if (minBalance < 0) {
             throw new IllegalArgumentException("Минимальный баланс не может быть отрицательной, а у вас: " + minBalance);
         }
-        if (maxBalance < 0){
+        if (maxBalance < 0) {
             throw new IllegalArgumentException("Максимальный баланс не может быть отрицательной, а у вас: " + maxBalance);
         }
         if (maxBalance < minBalance) {
@@ -34,7 +34,8 @@ public class SavingAccount extends Account {
     public boolean pay(int amount) {
         if (amount <= 0) {
             return payCheck = false;
-        }  if (balance - amount >= minBalance) {
+        }
+        if (balance - amount >= minBalance) {
             balance -= amount;
             return payCheck = true;
         } else {
@@ -46,21 +47,24 @@ public class SavingAccount extends Account {
     public boolean add(int amount) {
         if (amount <= 0) {
             return addCheck = false;
-        }  if (balance + amount <= maxBalance) {
+        }
+        if (balance + amount <= maxBalance) {
             balance += amount;
             return addCheck = true;
         } else {
             return addCheck = false;
         }
     }
+
     @Override
     public int yearChange() {
         if (payCheck) {
             return 0;
         } else if (addCheck) {
             return 0;
-        } else
-            return balance / 100 * rate;
+        } else {
+            return balance * rate / 100;
+        }
     }
 
     public int getMinBalance() {
